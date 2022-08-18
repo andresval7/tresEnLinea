@@ -7,7 +7,7 @@ class TresEnLinea():
  
     def __init__(self):  
         self.raiz = Tk()
-        self.raiz.geometry('400x400')
+        self.raiz.geometry('700x900')
         self.raiz.configure(bg = 'beige')
         self.raiz.title('Tres en Linea Andres Vallejo')
         self.marco1 = ttk.Frame(self.raiz, borderwidth=2, relief="raised", padding=(10,10))
@@ -30,15 +30,19 @@ class TresEnLinea():
         self.separ1.grid(column=0, row=3)
         # Se inicializan cada una de las casillas del juego, nueve en total
         
-        self.casilla1 = ttk.Button(self.marco2, text='', padding=(5,5))
-        self.casilla2 = ttk.Button(self.marco2, text='', padding=(5,5))
-        self.casilla3 = ttk.Button(self.marco2, text='', padding=(5,5))
-        self.casilla4 = ttk.Button(self.marco2, text='', padding=(5,5))
-        self.casilla5 = ttk.Button(self.marco2, text='', padding=(5,5))
-        self.casilla6 = ttk.Button(self.marco2, text='', padding=(5,5))
-        self.casilla7 = ttk.Button(self.marco2, text='', padding=(5,5))
-        self.casilla8 = ttk.Button(self.marco2, text='', padding=(5,5))
-        self.casilla9 = ttk.Button(self.marco2, text='', padding=(5,5))
+        
+        self.imgVacio = PhotoImage(file="vacioIcon.png")
+        self.imgX = PhotoImage(file = "xIcon.png")
+        self.imgO = PhotoImage(file = "oIcon.png")
+        self.casilla1 = ttk.Button(self.marco2, text='', padding=(5,5), image = self.imgVacio)
+        self.casilla2 = ttk.Button(self.marco2, text='', padding=(5,5), image = self.imgVacio)
+        self.casilla3 = ttk.Button(self.marco2, text='', padding=(5,5), image = self.imgVacio)
+        self.casilla4 = ttk.Button(self.marco2, text='', padding=(5,5), image = self.imgVacio)
+        self.casilla5 = ttk.Button(self.marco2, text='', padding=(5,5), image = self.imgVacio)
+        self.casilla6 = ttk.Button(self.marco2, text='', padding=(5,5), image = self.imgVacio)
+        self.casilla7 = ttk.Button(self.marco2, text='', padding=(5,5), image = self.imgVacio)
+        self.casilla8 = ttk.Button(self.marco2, text='', padding=(5,5), image = self.imgVacio)
+        self.casilla9 = ttk.Button(self.marco2, text='', padding=(5,5), image = self.imgVacio)
         
         self.marco2.grid(column=0, row=1)
         self.casilla1.grid(column=0,row=0)
@@ -82,6 +86,7 @@ class TresEnLinea():
         for i in self.casillas:
             i.configure(text="")
             i.configure(state=NORMAL)
+            i.configure(image=self.imgVacio)
         
     def iniciar(self):
         self.puntajeJ1 = 0
@@ -92,7 +97,7 @@ class TresEnLinea():
     
     def mostrar(self,cas,coord):
         if self.marca=="X":
-            cas.configure(text="X")
+            cas.configure(image=self.imgX)
             self.tablero[coord[0],coord[1]]=1
             if self.comprobarGanador():
                 self.labelGanador.configure(text="Ganador: Jugador 1")
@@ -102,7 +107,7 @@ class TresEnLinea():
                     i.configure(state=DISABLED)
             self.marca="O"
         else:
-            cas.configure(text="O")
+            cas.configure(image=self.imgO)
             self.tablero[coord[0],coord[1]]=-1
             if self.comprobarGanador():
                 self.labelGanador.configure(text="Ganador: Jugador 2")
